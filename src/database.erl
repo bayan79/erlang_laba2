@@ -23,11 +23,8 @@ init_db(Nodes) ->
     ok.
 
 info_db(Info) ->
-    F = fun(Item) ->
-            mnesia:table_info(person, Item)
-        end,
-    Res = mnesia:activity(sync_dirty, F, [Info], mnesia_frag),
-    Res.
+    F = fun(Item) -> mnesia:table_info(person, Item) end,
+    mnesia:activity(sync_dirty, F, [Info], mnesia_frag).
 
 store_db(Name, Age) ->
     AF = fun() -> mnesia:write(#person{name=Name, age=Age}) end,

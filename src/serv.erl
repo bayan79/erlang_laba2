@@ -28,10 +28,10 @@ init([]) ->
 handle_call({store, {Name, Age}}, _From, _) ->
     database:store_db(Name, Age),
     {reply, ok};
-handle_call({get, Name}, _From, _) ->
+handle_call({get, Name}, _, _) ->
     Results = database:get_db(Name),
     {reply, Results};
-handle_call({info, Info}, _From, _) ->
+handle_call({info, Info}, _, _) ->
     Res = database:info_db(Info),
     {reply, Res}.
 
