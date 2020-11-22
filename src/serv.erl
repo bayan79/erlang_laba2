@@ -2,7 +2,7 @@
 
 -behaviour(gen_server).
 
--export([start_link/0]).
+-export([start_link/1]).
 
 %% gen_server callbacks
 -export([init/1,
@@ -14,13 +14,13 @@
 
 -record(state, {}).
 
-start_link() ->
-    gen_server:start_link({global, ?MODULE}, ?MODULE, [], []).
+start_link(Hosts) ->
+    gen_server:start_link({global, ?MODULE}, ?MODULE, [Hosts], []).
 
-init([]) ->
+init([Hosts]) ->
     process_flag(trap_exit, false),
-    NodesShortName = [host1@arch, host2@arch],
-    [net_adm:ping(Node) || Node <- NodesShortName],
+    io:fwrite("==========TEST!!!: ~p~n", [Hosts]),
+    [net_adm:ping(Node) || Node <- Hosts],
     database:init_db([node() | nodes()]),
     {ok, #state{}}.
 
