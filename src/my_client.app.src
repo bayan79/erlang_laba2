@@ -1,0 +1,15 @@
+{application, my_client,
+ [
+  {description, "Client for Mnesia project on Erlang"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {modules, [client, database, serv]},
+  {env, []},
+  {maintainers, ["Anzhelka Ivanova"]},
+  {licenses, ["MIT"]},
+  {links, [{"Github", "https://github.com/bayan79/erlang_laba2"}]}
+ ]}.
