@@ -19,7 +19,6 @@ start_link(Hosts) ->
 
 init([Hosts]) ->
     process_flag(trap_exit, false),
-    io:fwrite("==========TEST!!!: ~p~n", [Hosts]),
     [net_adm:ping(Node) || Node <- Hosts],
     database:init_db([node() | nodes()]),
     {ok, #state{}}.

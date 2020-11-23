@@ -10,14 +10,16 @@ init_app(Hosts) ->
 
 db_info(Info) ->
     {reply, Response} = serv:handle_call({info, Info}, self(), null),
-    io:fwrite("Info[~p]: ~p~n", [Info, Response]).
+    io:fwrite("Info[~p]: ~p~n", [Info, Response]),
+    Response.
 
 add_person(Name, Age) ->
     serv:handle_call({store, {Name, Age}}, self(), null),
-    io:fwrite("Person added!~n").
+    io:fwrite("Person added!~n"),
+    ok.
 
 get_person(Name) ->
     {reply, Response} = serv:handle_call({get, Name}, self(), null),
     PrintF = fun({Name, Age}) -> io:fwrite("Person: ~p (~p) ~n", [Name, Age]) end,
     lists:map(PrintF, Response),
-    ok.
+    Response.
