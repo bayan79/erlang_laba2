@@ -1,7 +1,7 @@
 -module(database).
 -include_lib("stdlib/include/qlc.hrl").
 
--export([init_db/1, info_db/1, get_db/1, store_db/2]).
+-export([init_db/1, info_db/1, get_db/1, store_db/2, get_all/1]).
 
 -record(person, {name, age}).
 

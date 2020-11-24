@@ -2,7 +2,7 @@
 
 -author("bayan79").
 
--export([init_app/1, db_info/1, add_person/2, get_person/1]).
+-export([init_app/1, db_info/1, add_person/2, get_person/1, get_all/1]).
 
 
 init_app(Hosts) ->
