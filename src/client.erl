@@ -26,5 +26,5 @@ get_person(Name) ->
 
 get_all(Frag) ->
     {reply, Response} = serv:handle_call({get_all, Frag}, self(), null),
-    io:fwrite("Got elements from ~p: ~p", [Frag, length(Response)]),
+    io:fwrite("Got elements from ~p: ~p~n", [Frag, length(Response)]),
     Response.

@@ -51,8 +51,7 @@ get_all(all) ->
     mnesia:activity(sync_dirty, AF, [], mnesia_frag);
 
 get_all(Frag) ->
-    KeysFun = fun () -> mnesia:dirty_all_keys(Frag) end,
-    Keys = mnesia:activity(transaction, KeysFun,[], mod_frag),
-    ItemsFun = fun () -> [mnesia:dirty_read(Frag, Key) || Key <- Keys] end,
-    Items = mnesia:activity(transaction, ItemsFun,[], mod_frag),
-    [unwrap_person(Person) || Person <- Items].
+    Read = fun(Key) -> mnesia:read(Frag, Key) end,
+    Read_frag = fun(Key) -> mnesia:activity(sync_dirty, Read, [Key], mnesia_frag) end,
+    Items = lists:concat([Read_frag(Key) || Key <- mnesia:dirty_all_keys(Frag)]),
+    lists:map(fun unwrap_person/1, Items).
