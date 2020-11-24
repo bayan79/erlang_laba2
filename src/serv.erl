@@ -10,7 +10,7 @@
     handle_cast/2,
     handle_info/2,
     terminate/2,
-    code_change/3, get_all/1]).
+    code_change/3]).
 
 -record(state, {}).
 
