@@ -24,6 +24,9 @@ init([Hosts]) ->
     {ok, #state{}}.
 
 
+handle_call({get_all, Frag}, _From, _) ->
+    Results = database:get_all(Frag),
+    {reply, Results};
 handle_call({store, {Name, Age}}, _From, _) ->
     database:store_db(Name, Age),
     {reply, ok};

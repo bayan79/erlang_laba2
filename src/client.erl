@@ -23,3 +23,8 @@ get_person(Name) ->
     PrintF = fun({Name, Age}) -> io:fwrite("Person: ~p (~p) ~n", [Name, Age]) end,
     lists:map(PrintF, Response),
     Response.
+
+get_all(Frag) ->
+    {reply, Response} = serv:handle_call({get_all, Frag}, self(), null),
+    io:fwrite("Got elements from ~p: ~p", [Frag, length(Response)]),
+    Response.
